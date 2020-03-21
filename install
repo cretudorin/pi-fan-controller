@@ -1,8 +1,9 @@
 #! /bin/sh
 
-set -e
+sudo apt-get install gcc -y
+sudo pip3 install -r ../requirements.txt
 
-cd "$(dirname "$0")/.."
+set -e
 
 echo "=> Installing fan controller...\n"
 sudo cp fancontrol.py /usr/local/bin/
