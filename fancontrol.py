@@ -46,15 +46,15 @@ if __name__ == '__main__':
         # isn't already running.
         # NOTE: `fan.value` returns 1 for "on" and 0 for "off"
         if temp > ON_THRESHOLD and not fan.value:
-            os.system('echo 0 | sudo tee /sys/class/leds/led0/brightness')
-            os.system('echo 0 | sudo tee /sys/class/leds/led1/brightness')
+            os.system('echo 1 > /dev/null | sudo tee /sys/class/leds/led0/brightness')
+            os.system('echo 1 > /dev/null | sudo tee /sys/class/leds/led1/brightness')
             fan.on()
 
         # Stop the fan if the fan is running and the temperature has dropped
         # to 10 degrees below the limit.
         elif fan.value and temp < OFF_THRESHOLD:
-            os.system('echo 1 | sudo tee /sys/class/leds/led0/brightness')
-            os.system('echo 1 | sudo tee /sys/class/leds/led1/brightness')
+            os.system('echo 0 > /dev/null | sudo tee /sys/class/leds/led0/brightness')
+            os.system('echo 0 > /dev/null | sudo tee /sys/class/leds/led1/brightness')
             fan.off()
 
         time.sleep(SLEEP_INTERVAL)
